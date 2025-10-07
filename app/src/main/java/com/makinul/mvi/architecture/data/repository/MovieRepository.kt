@@ -2,12 +2,14 @@ package com.makinul.mvi.architecture.data.repository
 
 import com.makinul.mvi.architecture.data.domain.Movie
 import kotlinx.coroutines.delay
-import javax.inject.Inject
 
-class MovieRepository @Inject constructor() {
+interface MovieRepository {
+    suspend fun getMovies(): List<Movie>
+}
 
-    suspend fun getMovies(): List<Movie> {
-        // Simulate fetching data from a remote server or database
+class MovieRepositoryImpl : MovieRepository {
+
+    override suspend fun getMovies(): List<Movie> {
         delay(2000)
         return listOf(
             Movie(1, "Alita Battle Angel", "2019"),
