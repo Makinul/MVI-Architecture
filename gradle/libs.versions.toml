@@ -15,6 +15,9 @@ ksp = "2.2.20-2.0.3"
 hilt = "2.57.2"
 koin = "4.1.1"
 
+cameraX = "1.5.0"
+mediaPipe = "0.10.26.1"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 
@@ -39,6 +42,18 @@ dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref =
 dagger-hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
+
+androidx-camera-core = { module = "androidx.camera:camera-core", version.ref = "cameraX" }
+androidx-camera-compose = { module = "androidx.camera:camera-compose", version.ref = "cameraX" }
+androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "cameraX" }
+androidx-camera-extensions = { module = "androidx.camera:camera-extensions", version.ref = "cameraX" }
+androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "cameraX" }
+androidx-camera-mlkit-vision = { module = "androidx.camera:camera-mlkit-vision", version.ref = "cameraX" }
+androidx-camera-video = { module = "androidx.camera:camera-video", version.ref = "cameraX" }
+androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "cameraX" }
+
+mediapipe-tasks-vision = { group = "com.google.mediapipe", name = "tasks-vision", version.ref = "mediaPipe" }
+mediapipe-tasks-text = { group = "com.google.mediapipe", name = "tasks-text", version.ref = "mediaPipe" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
