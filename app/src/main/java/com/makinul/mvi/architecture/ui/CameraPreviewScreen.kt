@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
@@ -43,7 +43,15 @@ import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
 import kotlinx.coroutines.delay
+import nl.dionsegijn.konfetti.compose.KonfettiView
+import nl.dionsegijn.konfetti.core.Party
+import nl.dionsegijn.konfetti.core.Position
+import nl.dionsegijn.konfetti.core.Rotation
+import nl.dionsegijn.konfetti.core.emitter.Emitter
+import nl.dionsegijn.konfetti.core.models.Shape
+import nl.dionsegijn.konfetti.core.models.Size
 import java.util.UUID
+import java.util.concurrent.TimeUnit
 
 
 @OptIn(ExperimentalPermissionsApi::class)
@@ -130,12 +138,36 @@ private fun CameraPreviewContent(
             enter = fadeIn(),
             exit = fadeOut(),
             modifier = Modifier
-                .offset { autofocusCoords.takeOrElse { Offset.Zero }.round() }
-                .offset((-24).dp, (-24).dp)
         ) {
+            KonfettiView(
+                modifier = Modifier.fillMaxSize(),
+                parties =
+                    listOf(
+                        Party(
+                            speed = 10f,
+                            maxSpeed = 30f,
+                            damping = 0.9f,
+                            spread = 360,
+                            size = listOf(Size.SMALL, Size.LARGE, Size.LARGE),
+                            shapes = listOf(Shape.Square, Shape.Circle),
+                            timeToLive = 500L,
+                            fadeOutEnabled = false,
+                            rotation = Rotation.enabled(),
+                            colors = listOf(0xfce18a, 0xff726d, 0xf4306d, 0xb48def),
+                            emitter = Emitter(duration = 100, TimeUnit.MILLISECONDS).max(30),
+                            position = Position.Absolute(autofocusCoords.x, autofocusCoords.y),
+                        )
+
+                    )
+
+            )
             Spacer(Modifier
+                .requiredSize(48.dp)
+                .offset { autofocusCoords.takeOrElse { Offset.Zero } .round() }
+                .offset((-24).dp, (-24).dp)
+
                 .border(2.dp, Color.White, CircleShape)
-                .size(48.dp))
+            )
         }
     }
 }
